@@ -1,0 +1,26 @@
+rules_version = '2'; 
+
+service cloud.firestore {
+  match /databases/{database}/documents { 
+    match /novels/{authorId} { 
+      allow read; 
+    } 
+    // match /books/{bookId} { 
+    //   allow read; 
+    // } 
+    // match /publishers/{publisherId} {
+    //   allow read; 
+    // } 
+    // match /docCounters/{docCounterId} { 
+    //   allow read; 
+    //   allow update: if request.auth.uid != null 
+    //   && docCounterId == 'users' 
+    //   && (request.resource.data.count == resource.data.count + 1
+    //   || request.resource.data.count == resource.data.count - 1); 
+    // } 
+    // match /users/{userId} { 
+    //   allow read; 
+    //   allow create: if request.auth.uid != null && request.auth.uid == userId 
+    // } 
+  } 
+}
