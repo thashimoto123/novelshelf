@@ -25,7 +25,12 @@ const NovelCard: FC<{ novel: Novel }> = ({ novel }) => {
           )}
         </CardHeader>
         <CardMeta>
-          {Object.keys(novel.genre).map((genreName) => genreName)}
+          {novel.genre.map((g, i) => (
+            <>
+              {g}
+              {i !== 0 && <> / </>}
+            </>
+          ))}
           <br />
           更新日：{getHumanDate(novel.updatedAt)}
         </CardMeta>

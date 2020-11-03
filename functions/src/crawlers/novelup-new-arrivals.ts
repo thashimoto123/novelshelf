@@ -88,9 +88,7 @@ export const feedNewArrivals = async (page: puppeteer.Page, lim = 100) => {
       '.novel_author span',
       (e) => e?.textContent?.split('･')[0].trim() || 'その他',
     );
-    novel.originalGenre = {
-      [genreName]: true,
-    };
+    novel.originalGenre = [genreName];
 
     novel.genre = getGenre(genreName, genreMap);
     novel.story = await item.$eval('.novel_synopsis p', (e) => e.textContent);

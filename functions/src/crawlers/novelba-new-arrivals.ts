@@ -59,9 +59,7 @@ export const feedNewArrivals = async (page: puppeteer.Page) => {
       '.info_list .ganre',
       (e) => e?.textContent?.trim() || 'その他',
     );
-    novel.originalGenre = {
-      [genreName]: true,
-    };
+    novel.originalGenre = [genreName];
     novel.genre = getGenre(genreName, genreMap);
 
     novel.story = await item.$eval('.info_list .detail', (e) => e.textContent);

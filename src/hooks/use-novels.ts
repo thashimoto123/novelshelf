@@ -31,11 +31,12 @@ const useNovels = (options?: NovelsOptions) => {
 
     let query = collection
       .orderBy('updatedAt', 'desc')
+      .orderBy('title', 'asc')
       .limit(optionsRef.current.limit);
     if (optionsRef.current.site)
       query = query.where('site', '==', optionsRef.current.site);
     if (optionsRef.current.genre)
-      query = query.where('genre', '==', optionsRef.current.genre);
+      query = query.where('genre', 'array-contains-ayn', [optionsRef.current.genre]);
 
     const load = async () => {
       setLoading(true);

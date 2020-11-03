@@ -15,7 +15,6 @@ import './index.css';
 
 firebase.initializeApp(firebaseConfig);
 
-
 ReactDOM.render(
   <BrowserRouter>
     <FirebaseApp>

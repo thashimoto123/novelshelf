@@ -3,7 +3,7 @@ export type GenreMap = {
 };
 
 export const getGenre = (gcode: string | number, genreMap: GenreMap) => {
-  const genre: { [genreName: string]: boolean } = {};
+  const genre: string[] = [];
   if (!gcode) {
     return genre;
   }
@@ -12,7 +12,7 @@ export const getGenre = (gcode: string | number, genreMap: GenreMap) => {
     .split('-')
     .forEach((code) => {
       if (genreMap[code]) {
-        genre[genreMap[code]] = true;
+        genre.push(genreMap[code]);
       }
     });
 
