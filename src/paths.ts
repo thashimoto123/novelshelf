@@ -1,8 +1,7 @@
 const paths = {
   novel: '/novel/:novelId([0-9]{13})',
   home: '/',
-  search: '/search',
-  signin: '/signin',
+  genre: '/genre/:genreId',
 };
 
 export default paths;

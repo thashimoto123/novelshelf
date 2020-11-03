@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import NewArrivals from 'components/Home/NewArrivals';
+import NewArrivals from 'components/NewArrivals';
 import useNovels from 'hooks/use-novels';
 
 const NewArrivalsContainer: FC = () => {

@@ -154,6 +154,8 @@ module.exports = {
       },
     ],
     'import/prefer-default-export': 'off',
+
+    "prettier/prettier": ["error", {"quoteProps": "preserve"}]
   },
   settings: {
     'import/parsers': {

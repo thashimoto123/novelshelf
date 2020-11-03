@@ -7,12 +7,12 @@ import { FirebaseContext } from 'contexts';
 type NovelsOptions = {
   limit?: number;
   site?: string;
-  genre?: string;
+  genre?: string[] | null;
 };
 const defaultOptions: Required<NovelsOptions> = {
   limit: 30,
   site: '',
-  genre: '',
+  genre: null,
 };
 
 const useNovels = (options?: NovelsOptions) => {
@@ -36,7 +36,11 @@ const useNovels = (options?: NovelsOptions) => {
     if (optionsRef.current.site)
       query = query.where('site', '==', optionsRef.current.site);
     if (optionsRef.current.genre)
-      query = query.where('genre', 'array-contains-ayn', [optionsRef.current.genre]);
+      query = query.where(
+        'genre',
+        'array-contains-any',
+        optionsRef.current.genre,
+      );
 
     const load = async () => {
       setLoading(true);

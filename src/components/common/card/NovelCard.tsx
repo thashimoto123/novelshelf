@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { Link } from 'react-router-dom';
 import { Novel } from 'services/novelshelf/models/novel';
 import { Card, Icon } from 'semantic-ui-react';
 
@@ -6,6 +7,7 @@ import CardHeader from 'components/common/atoms/CardHeader';
 import CardDescription from 'components/common/atoms/CardDescription';
 import CardMeta from 'components/common/atoms/CardMeta';
 import { limitCharactor } from 'utils/text-processor';
+import { genreMapByName } from 'services/novelshelf/constants';
 import { getHumanDate } from '../item-tools';
 
 const NovelCard: FC<{ novel: Novel }> = ({ novel }) => {
@@ -25,12 +27,19 @@ const NovelCard: FC<{ novel: Novel }> = ({ novel }) => {
           )}
         </CardHeader>
         <CardMeta>
-          {novel.genre.map((g, i) => (
-            <>
-              {g}
-              {i !== 0 && <> / </>}
-            </>
-          ))}
+          {novel.genre.map((genre, i) =>
+            genreMapByName[genre] ? (
+              <>
+                <Link to={`/genre/${genreMapByName[genre]}`}>{genre}</Link>
+                {i !== 0 && <> / </>}
+              </>
+            ) : (
+              <>
+                {genre}
+                {i !== 0 && <> / </>}
+              </>
+            ),
+          )}
           <br />
           更新日：{getHumanDate(novel.updatedAt)}
         </CardMeta>
@@ -45,6 +54,7 @@ const NovelCard: FC<{ novel: Novel }> = ({ novel }) => {
               <Icon name="user" />
               <a href={novel.authorUrl} target="_blank" rel="noreferrer">
                 {novel.author} / {novel.site}
+                <Icon name="clone outline" style={{ fontSize: '0.8em' }} />
               </a>
             </>
           ) : (

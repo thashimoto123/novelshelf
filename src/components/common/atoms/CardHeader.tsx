@@ -15,7 +15,7 @@ const CardHeader: FC<CardHeaderProps> = ({ children, ...props }) => {
       margin: 0 0 0.2em !important;
     }
     a {
-      color: ${theme.color.link} !important;
+      color: ${theme.color.black} !important;
       &:hover {
         text-decoration: underline;
       }
