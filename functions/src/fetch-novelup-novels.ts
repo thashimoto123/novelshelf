@@ -32,7 +32,7 @@ export default functions
     const page = await browser.newPage();
     const db = admin.firestore();
 
-    const novels = await feedNewArrivals(page, 30);
+    const novels = await feedNewArrivals(page, 100);
     const fetchCounts = await saveNovels(db, novels, siteName.novelup);
 
     await browser.close();

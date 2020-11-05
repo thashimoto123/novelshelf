@@ -6,6 +6,7 @@ import { siteName } from '../services/novelshelf/constants';
 import { Novel, blankNovel } from '../services/novelshelf/models/novel';
 import { getGenre, GenreMap } from '../utils/genre';
 import { sleep } from '../utils/timer';
+import { zeroPad } from '../utils/text-processor';
 
 const genreMap: GenreMap = {
   '異世界ファンタジー': '異世界ファンタジー',
@@ -112,6 +113,46 @@ export const feedNewArrivals = async (page: puppeteer.Page, lim = 100) => {
     count += 1;
 
     if (count >= lim) break;
+  }
+
+  for await (const novel of novels) {
+    if (novel.url) {
+      await page.goto(novel.url, { waitUntil: 'domcontentloaded' });
+
+      const created = await page.$eval(
+        '#section_episode_info_table > .content_wrapper tbody tr:nth-child(6) td',
+        (e) => e?.textContent?.trim() || null,
+      );
+      if (created) {
+        const arr = created.split(/年|月|日\s|時|分/);
+        const createdDateStr = `${arr[0]}-${zeroPad(arr[1], 2)}-${zeroPad(
+          arr[2],
+          2,
+        )} ${zeroPad(arr[3], 2)}:${zeroPad(arr[4], 2)}:00`;
+        const createdDate = parseFromTimeZone(createdDateStr, {
+          timeZone: 'Asia/Tokyo',
+        });
+        novel.createdAt = admin.firestore.Timestamp.fromDate(createdDate);
+      }
+
+      const updated = await page.$eval(
+        '#section_episode_info_table > .content_wrapper tbody tr:nth-child(7) td',
+        (e) => e?.textContent?.trim() || null,
+      );
+      if (updated) {
+        const arr = updated.split(/年|月|日\s|時|分/);
+        const updatedDateStr = `${arr[0]}-${zeroPad(arr[1], 2)}-${zeroPad(
+          arr[2],
+          2,
+        )} ${zeroPad(arr[3], 2)}:${zeroPad(arr[4], 2)}:00`;
+        const updatedDate = parseFromTimeZone(updatedDateStr, {
+          timeZone: 'Asia/Tokyo',
+        });
+        novel.updatedAt = admin.firestore.Timestamp.fromDate(updatedDate);
+      }
+
+      await sleep(1000);
+    }
   }
 
   return novels;

@@ -66,7 +66,7 @@ export default functions
   .timeZone('Asia/Tokyo')
   .onRun(async () => {
     const novelItems = await fetchNovelsFromNarouApi({
-      lim: 30,
+      lim: 300,
     });
     const db = admin.firestore();
 
