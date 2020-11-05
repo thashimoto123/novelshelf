@@ -9,27 +9,27 @@ import { Novel, blankNovel } from './services/novelshelf/models/novel';
 import { getGenre, GenreMap } from './utils/genre';
 
 const integratedGenreMap: GenreMap = {
-  '101': '恋愛/ラブコメ',
-  '102': '恋愛/ラブコメ',
-  '201': '異世界ファンタジー',
-  '202': '異世界ファンタジー',
-  '301': '文芸/純文学',
-  '302': '文芸/純文学',
-  '303': '歴史/時代/伝奇',
-  '304': 'ミステリー',
-  '305': 'ホラー',
-  '306': '文芸/純文学',
-  '307': '文芸/純文学',
-  '401': 'SF',
-  '402': 'SF',
-  '403': 'SF',
-  '404': 'SF',
-  '9901': 'その他',
-  '9902': '詩/短歌',
-  '9903': 'エッセイ/評論/コラム/ノンフィクション',
-  '9904': 'その他',
-  '9999': 'その他',
-  '9801': 'その他',
+  '101': 'romance',
+  '102': 'romance',
+  '201': 'fantasy',
+  '202': 'fantasy',
+  '301': 'literature',
+  '302': 'literature',
+  '303': 'history',
+  '304': 'mystery',
+  '305': 'horror',
+  '306': 'literature',
+  '307': 'literature',
+  '401': 'sf',
+  '402': 'sf',
+  '403': 'sf',
+  '404': 'sf',
+  '9901': 'other',
+  '9902': 'poetry',
+  '9903': 'essay',
+  '9904': 'other',
+  '9999': 'other',
+  '9801': 'other',
 };
 
 const originalGenreMap: GenreMap = {
@@ -59,7 +59,7 @@ const originalGenreMap: GenreMap = {
 export default functions
   .region('asia-northeast1')
   .runWith({
-    timeoutSeconds: 300,
+    timeoutSeconds: 200,
     memory: '2GB',
   })
   .pubsub.schedule('0 0,4,8,12,16,20 * * *')

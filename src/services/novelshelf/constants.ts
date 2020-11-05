@@ -10,22 +10,7 @@ export const siteName = {
   novelba: 'ノベルバ',
 } as const;
 
-export const genreMapByName: { [labelName: string]: string } = {
-  '異世界ファンタジー': 'fantasy',
-  '現代/その他ファンタジー': 'contemporary',
-  'SF': 'sf',
-  '恋愛/ラブコメ': 'romance',
-  'ホラー': 'horror',
-  'ミステリー': 'mystery',
-  'エッセイ/評論/コラム/ノンフィクション': 'essay',
-  '歴史/時代/伝奇': 'history',
-  '現代/青春ドラマ/現代アクション': 'drama',
-  '詩/短歌': 'poetry',
-  '文芸/純文学': 'literature',
-  'その他': 'other',
-};
-
-export const genreMapById: { [labelName: string]: string } = {
+export const genre: { [labelName: string]: string } = {
   fantasy: '異世界ファンタジー',
   contemporary: '現代/その他ファンタジー',
   sf: 'SF',

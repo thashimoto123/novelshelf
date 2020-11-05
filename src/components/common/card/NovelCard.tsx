@@ -7,7 +7,7 @@ import CardHeader from 'components/common/atoms/CardHeader';
 import CardDescription from 'components/common/atoms/CardDescription';
 import CardMeta from 'components/common/atoms/CardMeta';
 import { limitCharactor } from 'utils/text-processor';
-import { genreMapByName } from 'services/novelshelf/constants';
+import { genre } from 'services/novelshelf/constants';
 import { getHumanDate } from '../item-tools';
 
 const NovelCard: FC<{ novel: Novel }> = ({ novel }) => {
@@ -27,18 +27,14 @@ const NovelCard: FC<{ novel: Novel }> = ({ novel }) => {
           )}
         </CardHeader>
         <CardMeta>
-          {novel.genre.map((genre, i) =>
-            genreMapByName[genre] ? (
-              <>
-                <Link to={`/genre/${genreMapByName[genre]}`}>{genre}</Link>
-                {i !== 0 && <> / </>}
-              </>
-            ) : (
-              <>
-                {genre}
-                {i !== 0 && <> / </>}
-              </>
-            ),
+          {novel.genre.map(
+            (genreId, i) =>
+              genre[genreId] && (
+                <>
+                  <Link to={`/genre/${genreId}`}>{genre[genreId]}</Link>
+                  {i !== 0 && <> / </>}
+                </>
+              ),
           )}
           <br />
           更新日時：{getHumanDate(novel.updatedAt)}
