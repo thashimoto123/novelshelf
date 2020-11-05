@@ -41,7 +41,7 @@ const NovelCard: FC<{ novel: Novel }> = ({ novel }) => {
             ),
           )}
           <br />
-          更新日：{getHumanDate(novel.updatedAt)}
+          更新日時：{getHumanDate(novel.updatedAt)}
         </CardMeta>
         <CardDescription>
           {novel.story ? limitCharactor(novel.story, 120) : ''}
