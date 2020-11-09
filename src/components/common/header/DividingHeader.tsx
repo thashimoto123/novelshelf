@@ -9,9 +9,14 @@ const DividingHeader: FC<{ icon?: string }> = ({ icon, children }) => {
   const Heading = styled(Header)`
     border-bottom: 1px solid rgba(34, 36, 38, 0.33) !important;
     color: ${theme.color.black} !important;
-    font-size: 1em !important;
-    margin: 1em 0 0.2em !important;
-    padding: 0 0.35em !important;
+    font-family: ${theme.font.fontFamily} !important;
+    font-size: 1.4em !important;
+    margin: 2em 0 0.2em !important;
+    padding: 0 2rem !important;
+    @media screen and (max-width: 768px) {
+      font-size: 1.2em !important;
+      padding: 0 1rem !important;
+    }
   `;
   const InsideIcon = styled(Icon)`
     font-size: 1.1em !important;

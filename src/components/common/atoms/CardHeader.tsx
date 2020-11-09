@@ -11,6 +11,7 @@ const CardHeader: FC<CardHeaderProps> = ({ children, ...props }) => {
   const Header = styled(Card.Header)`
     &&& {
       color: ${theme.color.black} !important;
+      font-family: ${theme.font.fontFamily} !important;
       font-size: 1.2rem !important;
       margin: 0 0 0.2em !important;
     }

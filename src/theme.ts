@@ -14,6 +14,9 @@ const novelshelfTheme = {
     google: '#1a73e8',
     rakuten: '#d86060',
   },
+  font: {
+    fontFamily: "'游ゴシック', YuGothic, 'Yu Gothic', sans-serif",
+  },
 };
 
 export default novelshelfTheme;

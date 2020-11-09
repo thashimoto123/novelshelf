@@ -30,10 +30,10 @@ const NovelCard: FC<{ novel: Novel }> = ({ novel }) => {
           {novel.genre.map(
             (genreId, i) =>
               genre[genreId] && (
-                <>
+                <React.Fragment key={genreId}>
                   <Link to={`/genre/${genreId}`}>{genre[genreId]}</Link>
                   {i !== 0 && <> / </>}
-                </>
+                </React.Fragment>
               ),
           )}
           <br />

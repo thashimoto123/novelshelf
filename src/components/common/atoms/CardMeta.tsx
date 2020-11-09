@@ -10,6 +10,7 @@ const CardMeta: FC<CardMetaProps> = ({ children, ...props }) => {
   const Meta = styled(Card.Meta)`
     font-size: 0.8rem !important;
     color: ${theme.color.gray} !important;
+    font-family: ${theme.font.fontFamily} !important;
     a {
       color: ${theme.color.gray} !important;
       &:hover {
