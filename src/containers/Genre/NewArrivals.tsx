@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useMemo } from 'react';
 import { useHistory, useParams } from 'react-router';
 
 import NewArrivals from 'components/NewArrivals';
@@ -8,11 +8,17 @@ import paths from 'paths';
 const NewArrivalsContainer: FC = () => {
   const history = useHistory();
   const { genreId } = useParams<{ genreId: string }>();
+  const options = useMemo(
+    () => ({
+      limit: 100,
+      genre: [genreId],
+    }),
+    [genreId],
+  );
+
   if (!genreId) history.replace(paths.home);
-  const { novels, loading } = useNovels({
-    limit: 100,
-    genre: [genreId],
-  });
+
+  const { novels, loading } = useNovels(options);
 
   return <NewArrivals novels={novels} loading={loading} genreId={genreId} />;
 };

@@ -21,9 +21,9 @@ const useNovels = (options?: NovelsOptions) => {
   const [error, setError] = useState<Error | null>(null);
 
   const firebaseRef = useRef(useContext(FirebaseContext));
-  const optionsRef = useRef({ ...defaultOptions, ...options });
 
   useEffect(() => {
+    const opts = { ...defaultOptions, ...options };
     const { db } = firebaseRef.current;
     if (!db) throw new Error('Firestore is not initialized');
 
@@ -32,15 +32,10 @@ const useNovels = (options?: NovelsOptions) => {
     let query = collection
       .orderBy('updatedAt', 'desc')
       .orderBy('title', 'asc')
-      .limit(optionsRef.current.limit);
-    if (optionsRef.current.site)
-      query = query.where('site', '==', optionsRef.current.site);
-    if (optionsRef.current.genre)
-      query = query.where(
-        'genre',
-        'array-contains-any',
-        optionsRef.current.genre,
-      );
+      .limit(opts.limit);
+    if (opts.site) query = query.where('site', '==', opts.site);
+    if (opts.genre)
+      query = query.where('genre', 'array-contains-any', opts.genre);
 
     const load = async () => {
       setLoading(true);
@@ -59,7 +54,7 @@ const useNovels = (options?: NovelsOptions) => {
     };
 
     load();
-  }, []);
+  }, [options]);
 
   return { novels, loading, error };
 };
